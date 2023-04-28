@@ -1,5 +1,7 @@
 import random
-
+import matplotlib.ticker
+import matplotlib.pyplot as plt
+import numpy as np
 #время необходимое чтобы дойти до каждой ячейки
 b = [1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 2, 2, 2, 3, 4, 5, 6, 7, 8, 9, 3, 3, 3, 3, 4, 5, 6, 7, 8, 9, 4, 4, 4, 4, 4, 5, 6, 7,
      8, 9, 5, 5, 5, 5, 5, 5, 6, 7, 8, 9, 6, 6, 6, 6, 6, 6, 6, 7, 8, 9, 7, 7, 7, 7, 7, 7, 7, 7, 8, 9, 8, 8, 8, 8, 8, 8,
@@ -136,4 +138,27 @@ for i in range(500):
         r2 -= 1  # роботы стали на секунду ближе к цели
     ss.append(s)
     results.append(max(ss))
-print(sum(results) / len(results))
+
+
+fig, ax = plt.subplots()
+
+fig.set_figwidth(650)
+
+ax.plot(results)
+ax.xaxis.set_minor_formatter(matplotlib.ticker.FixedFormatter(range(50, 500, 100)))
+locator = matplotlib.ticker.FixedLocator(range(0, 500, 50))
+ax.xaxis.set_minor_locator(locator)
+
+mean = np.mean(results)
+plt.axhline(mean, color='r', linestyle='--')
+
+plt.text(-24, np.mean(results)+3, f'{mean:.2f}', ha='left', va='center', color='black')
+plt.text(0, np.max(results)-0.2, f'Максимальное значение: {np.max(results):.2f}', ha='left', va='center', color='g')
+plt.text(0, np.min(results)+0.2, f'Минимальное значение: {np.min(results):.2f}', ha='left', va='center', color='b')
+
+
+
+plt.legend()
+
+
+plt.show()

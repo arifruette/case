@@ -1,5 +1,6 @@
+import matplotlib.ticker
 import numpy as np
-
+import matplotlib.pyplot as plt
 
 def recalc(items):
     #переменные для поиска первого и второго максимума
@@ -29,7 +30,6 @@ def recalc(items):
         for w in range(W, 0, -1):
             if items[i] <= w:
                 dp[w] = max(dp[w], dp[w - items[i]] + items[i])
-
     return dp[W]
 
 results = list()
@@ -48,5 +48,25 @@ for i in range(500):
             current[i, j] = (max(i, j)) * 2
     result = max([recalc(i.flatten()) for i in categories])
     results.append(result)
-print(results)
-print(np.mean(results))
+
+
+fig, ax = plt.subplots()
+
+fig.set_figwidth(650)
+
+ax.plot(results)
+ax.xaxis.set_minor_formatter(matplotlib.ticker.FixedFormatter(range(50, 500, 100)))
+locator = matplotlib.ticker.FixedLocator(range(0, 500, 50))
+ax.xaxis.set_minor_locator(locator)
+
+mean = np.mean(results)
+plt.axhline(mean, color='r', linestyle='--')
+
+plt.text(-95, np.mean(results)+3, f'Среднее значение: {mean:.2f}', ha='left', va='center', color='black')
+plt.text(0, np.max(results)-0.2, f'Максимальное значение: {np.max(results):.2f}', ha='left', va='center', color='g')
+plt.text(0, np.min(results)+0.2, f'Минимальное значение: {np.min(results):.2f}', ha='left', va='center', color='b')
+
+plt.legend()
+
+
+plt.show()
