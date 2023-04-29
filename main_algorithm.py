@@ -62,9 +62,12 @@ ax.xaxis.set_minor_locator(locator)
 mean = np.mean(results)
 plt.axhline(mean, color='r', linestyle='--')
 
-plt.text(-95, np.mean(results)+3, f'Среднее значение: {mean:.2f}', ha='left', va='center', color='black')
+plt.text(-23, np.mean(results)+3, f'{mean:.2f}', ha='left', va='center', color='black')
 plt.text(0, np.max(results)-0.2, f'Максимальное значение: {np.max(results):.2f}', ha='left', va='center', color='g')
 plt.text(0, np.min(results)+0.2, f'Минимальное значение: {np.min(results):.2f}', ha='left', va='center', color='b')
+
+plt.xlabel("Номер итерации")
+plt.ylabel("Время работы роботов")
 
 plt.legend()
 

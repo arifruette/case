@@ -156,6 +156,8 @@ plt.text(-24, np.mean(results)+3, f'{mean:.2f}', ha='left', va='center', color='
 plt.text(0, np.max(results)-0.2, f'Максимальное значение: {np.max(results):.2f}', ha='left', va='center', color='g')
 plt.text(0, np.min(results)+0.2, f'Минимальное значение: {np.min(results):.2f}', ha='left', va='center', color='b')
 
+plt.xlabel("Номер итерации")
+plt.ylabel("Время работы роботов")
 
 
 plt.legend()
